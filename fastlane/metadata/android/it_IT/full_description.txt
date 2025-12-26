@@ -1,0 +1,9 @@
+yes‑app is an open‑source, cross‑platform Flutter application that provides a native reading experience for articles from the school news site live.iiseinaudiscarpa.edu.it. It simplifies browsing and reading articles on Android, iOS, and other supported platforms without relying on a browser.
+
+Built with Flutter 3 and published under the GPL‑3.0 license, yes‑app can be self‑compiled or installed from releases, and is designed to make article consumption smoother and more user‑friendly on mobile devices. The app includes platform‑specific builds and encourages users to compile it themselves if prebuilt binaries are unavailable.
+
+Features:
+- Clean and native interface for reading school news
+- Cross‑platform support via Flutter
+- Open‑source code with GPL‑3.0 licensing
+- Easy compilation with standard Flutter tools

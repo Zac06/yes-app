@@ -1,0 +1,9 @@
+yes‑app è un'applicazione open‑source e multipiattaforma sviluppata con Flutter che offre un'esperienza nativa per leggere gli articoli dal sito delle notizie scolastiche live.iiseinaudiscarpa.edu.it. Permette di consultare e leggere gli articoli su dispositivi Android, iOS e altre piattaforme supportate senza dover usare il browser.
+
+Sviluppata con Flutter 3 e distribuita sotto licenza GPL‑3.0, yes‑app può essere compilata autonomamente o installata dai pacchetti precompilati, offrendo un'esperienza più fluida e intuitiva per la lettura delle notizie scolastiche sui dispositivi mobili.
+
+Caratteristiche principali:
+- Interfaccia pulita e nativa per leggere le notizie della scuola
+- Supporto multipiattaforma grazie a Flutter
+- Codice open‑source con licenza GPL‑3.0
+- Facile compilazione con strumenti standard Flutter
