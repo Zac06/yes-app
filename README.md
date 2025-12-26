@@ -25,7 +25,7 @@ Il codice è basato su Flutter 3 (con la sicurezza null inclusa) quindi è abbas
 
 ### Dall'app store
 
-L'applicazione sarà a breve disponibile su F-Droid.
+L'applicazione non sarà disponibile, almeno nel breve termine, su alcun app store, neppure F-Droid, a causa della complessità di upload.
 
 ### Manualmente
 
@@ -83,7 +83,7 @@ The code uses Flutter 3 (with null safety) so it's safe to say that you can also
 
 ### From an app store
 
-The application is going to be available on F-Droid.
+The application is not going to be available in the short term on any app store, not even F-Droid for the difficulty of upload.
 
 ### Manually
 
