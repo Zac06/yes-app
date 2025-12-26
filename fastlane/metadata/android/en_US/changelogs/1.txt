@@ -1,0 +1,3 @@
+- First stable app version
+- Reading articles from live.iiseinaudiscarpa.edu.it/yes-site
+- Native interface simple and clean
