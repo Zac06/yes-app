@@ -32,7 +32,7 @@ L'applicazione sarà a breve disponibile su F-Droid.
 1. Scarica l'APK più recente dalla sezione [Releases](https://github.com/Zac06/yes-app/releases) (o il bottone qui sotto) appropriata per la tua piattaforma. In caso di dubbio, scarica l'APK "universale".
 
 <h1 align=center>
-    <a href="releases/latest"><picture>
+    <a href="https://github.com/Zac06/yes-app/releases/latest"><picture>
         <img src="assets/readme/get-it-on-github.png" alt="Logo" width=50%>
     </picture></a>
 </h1>
@@ -90,7 +90,7 @@ The application is going to be available on F-Droid.
 1. Download the latest APK from the [Releases](https://github.com/Zac06/yes-app/releases) (or the underlying button) appropriate for your platform. If in doubt, download the "universal" APK.
 
 <h1 align=center>
-    <a href="releases/latest"><picture>
+    <a href="https://github.com/Zac06/yes-app/releases/latest"><picture>
         <img src="assets/readme/get-it-on-github.png" alt="Logo" width=50%>
     </picture></a>
 </h1>
