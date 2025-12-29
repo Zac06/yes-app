@@ -198,7 +198,7 @@ class _AppHomepageState extends State<AppHomepage> {
               ),
             ],
           ),
-          actions: [
+          /*actions: [
             // Test button for 1 notification
             IconButton(
               icon: const Icon(Icons.notifications_outlined, color: Colors.white),
@@ -211,7 +211,7 @@ class _AppHomepageState extends State<AppHomepage> {
               onPressed: _testTwoNotifications,
               tooltip: 'Test 2 notifiche',
             ),
-          ],
+          ],*/
         ),
         body: RefreshIndicator(
           onRefresh: () async => _loadPosts(refresh: true),
