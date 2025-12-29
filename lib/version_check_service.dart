@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:yessite_app/appfonts.dart';
+import 'appcolors.dart';
 
 class VersionCheckService {
   static const String _githubApiUrl =
@@ -61,20 +63,24 @@ class VersionCheckService {
   }
 
   /// Show update dialog
-  static void showUpdateDialog(
-    BuildContext context,
-    GitHubRelease release,
-  ) {
+  static void showUpdateDialog(BuildContext context, GitHubRelease release) {
     showDialog(
       context: context,
       barrierDismissible: false,
+      
       builder: (context) => AlertDialog(
-        title: const Text('Nuova versione disponibile'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: const Text('Nuova versione disponibile', style: AppFonts.headerFont),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Versione ${release.version} è ora disponibile!'),
+            Text(
+              'Versione ${release.version} è ora disponibile!',
+              style: AppFonts.bodyFont,
+            ),
             const SizedBox(height: 16),
             if (release.releaseNotes.isNotEmpty) ...[
               const Text(
@@ -93,6 +99,10 @@ class VersionCheckService {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.primary,
+              textStyle: AppFonts.bodyFont,
+            ),
             child: const Text('Ignora'),
           ),
           ElevatedButton(
@@ -103,6 +113,15 @@ class VersionCheckService {
                 await launchUrl(uri, mode: LaunchMode.externalApplication);
               }
             },
+
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: AppColors.onPrimary,
+              textStyle: AppFonts.bodyFont,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
             child: const Text('Scarica la nuova versione'),
           ),
         ],
