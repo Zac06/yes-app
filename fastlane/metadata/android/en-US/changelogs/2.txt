@@ -1,0 +1,4 @@
+- Fixed picture loading issue
+- Fixed multiple notification issue
+- Fixed notification icon issue
+- Added version check and update dialog

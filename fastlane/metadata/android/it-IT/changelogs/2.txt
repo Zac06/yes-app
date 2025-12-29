@@ -1,0 +1,4 @@
+- Risolto problema di caricamento immagine
+- Risolto problema di notifiche multiple
+- Risolto problema delle icone di notifica
+- Aggiunto controllo delle versioni e avviso di aggiornamento
