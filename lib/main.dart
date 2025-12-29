@@ -6,6 +6,7 @@ import 'post.dart';
 import 'article_page.dart';
 import 'notification_service.dart';
 import 'background_task_service.dart';
+import 'version_check_service.dart';
 
 class AppAssets {
   static const String logo = 'assets/images/titlelogo.png';
@@ -68,12 +69,26 @@ class _AppHomepageState extends State<AppHomepage> {
     _loadPosts();
     _scrollController.addListener(_onScroll);
     _initializeLastPostId();
+    _checkForUpdates();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  /// Check for app updates on GitHub
+  Future<void> _checkForUpdates() async {
+    // Wait a bit for the UI to load
+    await Future.delayed(const Duration(seconds: 2));
+    
+    if (!mounted) return;
+    
+    final release = await VersionCheckService.checkForUpdate();
+    if (release != null && mounted) {
+      VersionCheckService.showUpdateDialog(context, release);
+    }
   }
 
   /// Initialize last post ID on first app launch
@@ -132,11 +147,35 @@ class _AppHomepageState extends State<AppHomepage> {
     }
   }
 
-  /// Manual check for new posts (for testing)
-  Future<void> _manualCheckForNewPosts() async {
-    await NotificationService.manualCheck();
+  /// Test notification with one article
+  Future<void> _testOneNotification() async {
+    if (_posts.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nessun articolo disponibile')),
+      );
+      return;
+    }
+    
+    await NotificationService.testNotificationOne(_posts);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Sono stati controllati i nuovi post.')),
+      const SnackBar(content: Text('1 notifica di test inviata')),
+    );
+  }
+
+  /// Test notification with two articles
+  Future<void> _testTwoNotifications() async {
+    if (_posts.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nessun articolo disponibile')),
+      );
+      return;
+    }
+    
+    await NotificationService.testNotificationTwo(_posts);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${_posts.length > 1 ? "2" : "1"} notifica/e di test inviate'),
+      ),
     );
   }
 
@@ -159,14 +198,20 @@ class _AppHomepageState extends State<AppHomepage> {
               ),
             ],
           ),
-          /*actions: [
-            // Manual check button (for testing)
+          actions: [
+            // Test button for 1 notification
+            IconButton(
+              icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+              onPressed: _testOneNotification,
+              tooltip: 'Test 1 notifica',
+            ),
+            // Test button for 2 notifications
             IconButton(
               icon: const Icon(Icons.notifications_active, color: Colors.white),
-              onPressed: _manualCheckForNewPosts,
-              tooltip: 'Aggiorna i nuovi post',
+              onPressed: _testTwoNotifications,
+              tooltip: 'Test 2 notifiche',
             ),
-          ],*/
+          ],
         ),
         body: RefreshIndicator(
           onRefresh: () async => _loadPosts(refresh: true),
@@ -200,10 +245,21 @@ class _AppHomepageState extends State<AppHomepage> {
                           children: [
                             if (post.imageUrl != null)
                               Image.network(
-                                post.imageUrl!,
+                                post.imageUrl!.startsWith('http')
+                                    ? post.imageUrl!
+                                    : 'https://live.iiseinaudiscarpa.edu.it/yes-site${post.imageUrl!}',
                                 height: 180,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    height: 180,
+                                    color: Colors.grey[200],
+                                    child: const Center(
+                                      child: Icon(Icons.broken_image, size: 48),
+                                    ),
+                                  );
+                                },
                               ),
 
                             Padding(

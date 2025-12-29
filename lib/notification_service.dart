@@ -1,6 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'yes_api.dart';
+import 'post.dart';
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin _notifications =
@@ -13,7 +14,7 @@ class NotificationService {
   static Future<void> initialize() async {
     if (_initialized) return;
 
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings = AndroidInitializationSettings('@drawable/ic_launcher_monochrome');
     const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
@@ -25,7 +26,11 @@ class NotificationService {
       defaultIcon: AssetsLinuxIcon('assets/icons/icon.png')
     );
 
-    const windowsSettings = WindowsInitializationSettings(appName: 'YES-App', appUserModelId: 'it.zac06.yessite_app', guid: '{B1A5F7FC-3A0A-4F89-9EB7-A5A3B01DAD0A}',);
+    const windowsSettings = WindowsInitializationSettings(
+      appName: 'YES-App', 
+      appUserModelId: 'it.zac06.yessite_app', 
+      guid: '{B1A5F7FC-3A0A-4F89-9EB7-A5A3B01DAD0A}',
+    );
 
     final initSettings = InitializationSettings(
       android: androidSettings,
@@ -81,7 +86,7 @@ class NotificationService {
       await initialize();
 
       // Fetch the latest posts
-      final posts = await YESApi.fetchPosts(page: 1, perPage: 5);
+      final posts = await YESApi.fetchPosts(page: 1, perPage: 10);
       if (posts.isEmpty) return;
 
       final latestPost = posts.first;
@@ -95,23 +100,23 @@ class NotificationService {
 
       // Check if there are new posts
       if (latestPost.id > lastSeenId) {
-        // Count how many new posts
+        // Get all new posts
         final newPosts = posts.where((p) => p.id > lastSeenId).toList();
         
-        if (newPosts.length == 1) {
-          // Show notification for single new post
+        // Show one notification per new post
+        for (int i = 0; i < newPosts.length; i++) {
+          final post = newPosts[i];
           await _showNotification(
-            title: 'New Post Available',
-            body: latestPost.title,
-            payload: latestPost.id.toString(),
+            id: i,
+            title: 'Nuovo articolo',
+            body: post.title,
+            payload: post.id.toString(),
           );
-        } else {
-          // Show notification for multiple new posts
-          await _showNotification(
-            title: 'New Posts Available',
-            body: '${newPosts.length} new posts to read',
-            payload: latestPost.id.toString(),
-          );
+          
+          // Small delay between notifications to ensure they all appear
+          if (i < newPosts.length - 1) {
+            await Future.delayed(const Duration(milliseconds: 100));
+          }
         }
 
         // Update last seen ID
@@ -124,6 +129,7 @@ class NotificationService {
 
   /// Show a notification
   static Future<void> _showNotification({
+    required int id,
     required String title,
     required String body,
     String? payload,
@@ -134,7 +140,7 @@ class NotificationService {
       channelDescription: 'Notifications for new posts',
       importance: Importance.high,
       priority: Priority.high,
-      icon: '@mipmap/ic_launcher',
+      icon: '@drawable/ic_launcher_monochrome',
     );
 
     const iosDetails = DarwinNotificationDetails(
@@ -143,13 +149,12 @@ class NotificationService {
       presentSound: true,
     );
 
-    const linuxDetails=LinuxNotificationDetails(
+    const linuxDetails = LinuxNotificationDetails(
       urgency: LinuxNotificationUrgency.normal,
       category: LinuxNotificationCategory.email,
     );
 
-    const windowsDetails=WindowsNotificationDetails(
-    );
+    const windowsDetails = WindowsNotificationDetails();
 
     const details = NotificationDetails(
       android: androidDetails,
@@ -159,7 +164,7 @@ class NotificationService {
     );
 
     await _notifications.show(
-      0, // notification id
+      id,
       title,
       body,
       details,
@@ -171,5 +176,46 @@ class NotificationService {
   static Future<bool> manualCheck() async {
     await checkForNewPosts();
     return true;
+  }
+
+  /// Test notification with one article (removes first article from list)
+  static Future<void> testNotificationOne(List<Post> posts) async {
+    if (posts.isEmpty) return;
+    
+    await initialize();
+    final post = posts.first;
+    
+    await _showNotification(
+      id: 100,
+      title: 'Test: 1 Notifica',
+      body: post.title,
+      payload: post.id.toString(),
+    );
+  }
+
+  /// Test notification with two articles (removes first two articles from list)
+  static Future<void> testNotificationTwo(List<Post> posts) async {
+    if (posts.isEmpty) return;
+    
+    await initialize();
+    
+    final post1 = posts[0];
+    await _showNotification(
+      id: 200,
+      title: 'Test: Notifica 1/2',
+      body: post1.title,
+      payload: post1.id.toString(),
+    );
+    
+    if (posts.length > 1) {
+      await Future.delayed(const Duration(milliseconds: 100));
+      final post2 = posts[1];
+      await _showNotification(
+        id: 201,
+        title: 'Test: Notifica 2/2',
+        body: post2.title,
+        payload: post2.id.toString(),
+      );
+    }
   }
 }
