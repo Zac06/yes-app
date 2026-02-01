@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yessite_app/params/appassets.dart';
-import 'package:yessite_app/params/appcolors.dart';
 import 'package:yessite_app/params/appfonts.dart';
 import 'package:yessite_app/utils/category_list_assoc.dart';
 import '../../api/yes_api.dart';
-import '../../dt/post.dart';
-import '../reduced_article_tile.dart';
 import 'category_articles_screen.dart';
 import '../../widgets/category_list_button.dart';
 

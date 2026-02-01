@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import '../params/appfonts.dart';
-import '../params/appcolors.dart';
-import '../params/appassets.dart';
-import '../utils/category_list_assoc.dart';
 
 class CategoryListButton extends StatelessWidget {
   final String title;

@@ -21,7 +21,7 @@ class VersionCheckService {
       final response = await http.get(Uri.parse(_githubApiUrl));
 
       if (response.statusCode != 200) {
-        print('Failed to fetch GitHub release: ${response.statusCode}');
+        //print('Failed to fetch GitHub release: ${response.statusCode}');
         return null;
       }
 
@@ -41,7 +41,7 @@ class VersionCheckService {
 
       return null;
     } catch (e) {
-      print('Error checking for updates: $e');
+      //print('Error checking for updates: $e');
       return null;
     }
   }

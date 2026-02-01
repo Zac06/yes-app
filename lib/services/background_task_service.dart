@@ -6,15 +6,15 @@ import 'notification_service.dart';
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     try {
-      print('Background task started: $task');
+      //print('Background task started: $task');
       
       // Check for new posts
       await NotificationService.checkForNewPosts();
       
-      print('Background task completed successfully');
+      //print('Background task completed successfully');
       return Future.value(true);
     } catch (e) {
-      print('Background task error: $e');
+      //print('Background task error: $e');
       return Future.value(false);
     }
   });
@@ -46,18 +46,18 @@ class BackgroundTaskService {
       existingWorkPolicy: ExistingPeriodicWorkPolicy.replace,
     );
     
-    print('Periodic task registered: every ${frequency.inMinutes} minutes');
+    //print('Periodic task registered: every ${frequency.inMinutes} minutes');
   }
 
   /// Cancel all background tasks
   static Future<void> cancelAll() async {
     await Workmanager().cancelAll();
-    print('All background tasks cancelled');
+    //print('All background tasks cancelled');
   }
 
   /// Cancel specific task
   static Future<void> cancelPeriodicCheck() async {
     await Workmanager().cancelByUniqueName(_checkPostsTask);
-    print('Periodic check task cancelled');
+    //print('Periodic check task cancelled');
   }
 }

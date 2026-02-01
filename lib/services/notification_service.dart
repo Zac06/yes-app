@@ -123,7 +123,7 @@ class NotificationService {
         await saveLastPostId(latestPost.id);
       }
     } catch (e) {
-      print('Error checking for new posts: $e');
+      //print('Error checking for new posts: $e');
     }
   }
 
