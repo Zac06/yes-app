@@ -12,6 +12,7 @@ class AppColors {
 
   static const Color text=Colors.black;
   static const Color surfaceBack=Color.fromRGBO(234, 234, 234, 1.0);
+  static const Color surfaceBackBack=Color.fromRGBO(200, 200, 200, 1);
   static const Color surfaceTop=Colors.white;
 
 }

@@ -37,11 +37,12 @@ class YESApi {
     return Post.fromJson(data);
   }
 
-  static Future<List<Post>> searchPosts(String q) async {
+  static Future<List<Post>> searchPosts(String q, {int page=1}) async {
     final uri = Uri.parse(
       '$_base/posts'
       '?_embed'
-      '&search=${Uri.encodeQueryComponent(q)}',
+      '&search=${Uri.encodeQueryComponent(q)}'
+      '&page=$page'
     );
 
     final response = await http.get(uri);

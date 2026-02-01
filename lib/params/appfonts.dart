@@ -16,6 +16,17 @@ class AppFonts {
     color: Colors.black,
   );
 
+  static const TextStyle searchTitleFont = TextStyle(
+    fontFamily: headerFontFamily,
+    fontWeight: FontWeight.w700,
+    /*fontVariations: [
+      FontVariation(
+              'wght', 700.0)
+    ],*/
+    fontSize: 20.0,
+    color: Colors.black,
+  );
+
   static const TextStyle headerFont = TextStyle(
     fontFamily: headerFontFamily,
     fontWeight: FontWeight.w900,

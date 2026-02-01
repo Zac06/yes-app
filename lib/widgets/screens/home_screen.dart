@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yessite_app/widgets/full_article_tile.dart';
 import '../../dt/post.dart';
 import '../../api/yes_api.dart';
-import '../../widgets/article_page.dart';
 import '../../services/notification_service.dart';
 import '../../services/version_check_service.dart';
-import '../../params/appfonts.dart';
 import '../../params/appcolors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -154,109 +153,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (index >= _posts.length) {
                   return const Padding(
                     padding: EdgeInsets.symmetric(vertical: 16),
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(child: CircularProgressIndicator(color: AppColors.primary)),
                   );
                 }
                 final post = _posts[index];
-                return InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => ArticlePage(post: post),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    clipBehavior: Clip.antiAlias,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (post.imageUrl != null)
-                          Image.network(
-                            post.imageUrl!.startsWith('http')
-                                ? post.imageUrl!
-                                : 'https://live.iiseinaudiscarpa.edu.it/yes-site${post.imageUrl!}',
-                            height: 180,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                height: 180,
-                                color: Colors.grey[200],
-                                child: const Center(
-                                  child: Icon(Icons.broken_image, size: 48),
-                                ),
-                              );
-                            },
-                          ),
-
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                post.title,
-                                style: AppFonts.headerFont.copyWith(
-                                  color: AppColors.text,
-                                ),
-                              ),
-
-                              const SizedBox(height: 6),
-
-                              Text(
-                                '${post.authorLine} • '
-                                '${post.date.day}/${post.date.month}/${post.date.year}',
-                                style: AppFonts.bodyFont.copyWith(
-                                  color: AppColors.text,
-                                ),
-                              ),
-
-                              if (post.categories.isNotEmpty) ...[
-                                const SizedBox(height: 6),
-                                Wrap(
-                                  spacing: 6,
-                                  children: post.categories
-                                      .map(
-                                        (c) => Chip(
-                                          label: Text(c),
-                                          visualDensity: VisualDensity.compact,
-                                          padding: EdgeInsets.all(0),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              4,
-                                            ),
-                                            side: BorderSide(
-                                              color: AppColors.primaryActive,
-                                            ),
-                                          ),
-                                          backgroundColor:
-                                              AppColors.primaryActive,
-                                          labelStyle: AppFonts.catFont.copyWith(
-                                            color: AppColors.onPrimary,
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
-                                ),
-                              ],
-
-                              const SizedBox(height: 10),
-
-                              Text(
-                                post.excerpt,
-                                style: AppFonts.bodyFont.copyWith(
-                                  color: AppColors.text,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                return FullArticleTile(post: post);
               },
             ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'services/notification_service.dart';
 import 'services/background_task_service.dart';
 import 'layout/app_shell.dart';
+import 'params/appcolors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'MontSerrat',
         appBarTheme: const AppBarTheme(toolbarHeight: 72, centerTitle: true),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: AppColors.primary,
+        ),
       ),
       home: const AppShell(title: 'App'),
     );
