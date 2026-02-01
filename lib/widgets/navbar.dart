@@ -20,7 +20,6 @@ class BottomNavbar extends StatelessWidget {
       child: Padding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 10, vertical: 12),
       
-
       child: GNav(
         /*color: AppColors.onPrimaryInactive,
         activeColor: AppColors.onPrimary,
