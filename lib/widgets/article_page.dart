@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'appfonts.dart';
-import 'appcolors.dart';
-import 'post.dart';
+import '../params/appfonts.dart';
+import '../params/appcolors.dart';
+import '../dt/post.dart';
 
 class ArticlePage extends StatelessWidget {
   final Post post;

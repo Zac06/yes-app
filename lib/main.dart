@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:yessite_app/appcolors.dart';
-import 'package:yessite_app/appfonts.dart';
-import 'yes_api.dart';
-import 'post.dart';
-import 'article_page.dart';
-import 'notification_service.dart';
-import 'background_task_service.dart';
-import 'version_check_service.dart';
-import 'appassets.dart';
-import 'navbar.dart';
+import 'package:yessite_app/params/appcolors.dart';
+import 'package:yessite_app/params/appfonts.dart';
+import 'api/yes_api.dart';
+import 'dt/post.dart';
+import 'widgets/article_page.dart';
+import 'services/notification_service.dart';
+import 'services/background_task_service.dart';
+import 'services/version_check_service.dart';
+import 'params/appassets.dart';
+import 'widgets/navbar.dart';
 
 
 void main() async {

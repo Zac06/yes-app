@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'appcolors.dart';
-import 'appfonts.dart';
+import '../params/appcolors.dart';
+import '../params/appfonts.dart';
 
 class BottomNavbar extends StatelessWidget {
   final int currentIndex;
@@ -21,6 +21,7 @@ class BottomNavbar extends StatelessWidget {
         data: Theme.of(context).copyWith(
           splashColor: Colors.transparent,
           //highlightColor: Colors.transparent
+          
         ),
         child: BottomNavigationBar(
           currentIndex: currentIndex,
