@@ -7,24 +7,23 @@ import 'article_page.dart';
 import 'notification_service.dart';
 import 'background_task_service.dart';
 import 'version_check_service.dart';
+import 'appassets.dart';
+import 'navbar.dart';
 
-class AppAssets {
-  static const String logo = 'assets/images/titlelogo.png';
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize notification service
   await NotificationService.initialize();
   await NotificationService.requestPermissions();
-  
+
   // Initialize background tasks
   await BackgroundTaskService.initialize();
   await BackgroundTaskService.registerPeriodicCheck(
     frequency: const Duration(minutes: 15), // Android minimum is 15 minutes
   );
-  
+
   runApp(const MyApp());
 }
 
@@ -63,6 +62,14 @@ class _AppHomepageState extends State<AppHomepage> {
   bool _loadingMore = false;
   bool _hasMore = true;
 
+  static int currentIndex=0;
+
+  void onTap(int index){
+    setState(() {
+      currentIndex=index;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -82,9 +89,9 @@ class _AppHomepageState extends State<AppHomepage> {
   Future<void> _checkForUpdates() async {
     // Wait a bit for the UI to load
     await Future.delayed(const Duration(seconds: 2));
-    
+
     if (!mounted) return;
-    
+
     final release = await VersionCheckService.checkForUpdate();
     if (release != null && mounted) {
       VersionCheckService.showUpdateDialog(context, release);
@@ -124,7 +131,7 @@ class _AppHomepageState extends State<AppHomepage> {
         _loadingMore = false;
       });
       _currentPage++;
-      
+
       // Update last seen post ID when refreshing
       if (refresh && _posts.isNotEmpty) {
         await NotificationService.saveLastPostId(_posts.first.id);
@@ -155,11 +162,11 @@ class _AppHomepageState extends State<AppHomepage> {
       );
       return;
     }
-    
+
     await NotificationService.testNotificationOne(_posts);
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('1 notifica di test inviata')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('1 notifica di test inviata')));
   }
 
   /// Test notification with two articles
@@ -170,11 +177,13 @@ class _AppHomepageState extends State<AppHomepage> {
       );
       return;
     }
-    
+
     await NotificationService.testNotificationTwo(_posts);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${_posts.length > 1 ? "2" : "1"} notifica/e di test inviate'),
+        content: Text(
+          '${_posts.length > 1 ? "2" : "1"} notifica/e di test inviate',
+        ),
       ),
     );
   }
@@ -183,6 +192,7 @@ class _AppHomepageState extends State<AppHomepage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: BottomNavbar(currentIndex: currentIndex, onTap: onTap),
         backgroundColor: AppColors.surfaceBack,
         appBar: AppBar(
           backgroundColor: AppColors.primary,
@@ -198,10 +208,13 @@ class _AppHomepageState extends State<AppHomepage> {
               ),
             ],
           ),
-          /*actions: [
+          actions: [
             // Test button for 1 notification
             IconButton(
-              icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+              icon: const Icon(
+                Icons.notifications_outlined,
+                color: Colors.white,
+              ),
               onPressed: _testOneNotification,
               tooltip: 'Test 1 notifica',
             ),
@@ -211,7 +224,7 @@ class _AppHomepageState extends State<AppHomepage> {
               onPressed: _testTwoNotifications,
               tooltip: 'Test 2 notifiche',
             ),
-          ],*/
+          ],
         ),
         body: RefreshIndicator(
           onRefresh: () async => _loadPosts(refresh: true),

@@ -10,7 +10,7 @@
 # Italiano
 
 > [!WARNING]
-> Qeusta applicazione non verrà per il momento pubblicata sul Google Play Store o sull'Apple App Store, in quanto ciò:
+> Questa applicazione non verrà per il momento pubblicata sul Google Play Store o sull'Apple App Store, in quanto ciò:
 > 1. Richiede spese che non intendo attualmente effettuare
 > 2. Richiede l'immissione di dati personali come l'indirizzo di casa e il numero di telefono. Potrei creare un account business, ma questo richiederebbe altre spese e burocrazia che non posso sostenere al momento.
 ---

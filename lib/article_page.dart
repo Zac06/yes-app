@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'appfonts.dart';
 import 'appcolors.dart';
 import 'post.dart';
@@ -8,6 +9,13 @@ class ArticlePage extends StatelessWidget {
   final Post post;
 
   const ArticlePage({super.key, required this.post});
+
+  Future<void> _launchUrl(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url, mode: LaunchMode.platformDefault)) {
+      debugPrint('Could not launch $urlString');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +30,18 @@ class ArticlePage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Html(
           data: post.contentHtml,
+          onLinkTap: (url, attributes, element) {
+            if (url != null) {
+              _launchUrl(url);
+            }
+          },
           style: {
             "body": AppFonts.htmlFromTextStyle(
               AppFonts.bodyFont.copyWith(color: AppColors.text),
             ),
-            "img": Style(
-              width: Width.auto(),
-              margin: Margins.only(bottom: 16),
-            ),
+            "img": Style(width: Width.auto(), margin: Margins.only(bottom: 16)),
             // WordPress caption wrapper
-            "figure": Style(
-              margin: Margins.only(bottom: 16),
-            ),
+            "figure": Style(margin: Margins.only(bottom: 16)),
             // Caption text styling
             "figcaption": Style(
               fontSize: FontSize(14),
@@ -59,10 +67,7 @@ class ArticlePage extends StatelessWidget {
               padding: HtmlPaddings.all(16),
               margin: Margins.symmetric(vertical: 16),
               border: Border(
-                left: BorderSide(
-                  color: AppColors.primaryActive,
-                  width: 4,
-                ),
+                left: BorderSide(color: AppColors.primaryActive, width: 4),
               ),
             ),
             // Heading styles
@@ -112,14 +117,11 @@ class ArticlePage extends StatelessWidget {
             "hr": Style(
               margin: Margins.symmetric(vertical: 20),
               border: Border(
-                top: BorderSide(
-                  color: Colors.grey[300]!,
-                  width: 1,
-                ),
+                top: BorderSide(color: Colors.grey[300]!, width: 1),
               ),
             ),
           },
-         
+
           extensions: [
             TagExtension(
               tagsToExtend: {"img"},
@@ -152,7 +154,7 @@ class ArticlePage extends StatelessWidget {
                       child: CircularProgressIndicator(
                         value: loadingProgress.expectedTotalBytes != null
                             ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
+                                  loadingProgress.expectedTotalBytes!
                             : null,
                       ),
                     );

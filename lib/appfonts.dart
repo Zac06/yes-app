@@ -49,6 +49,17 @@ class AppFonts {
     color: Colors.black,
   );
 
+  static const TextStyle navbarFont = TextStyle(
+    fontFamily: headerFontFamily,
+    fontWeight: FontWeight.w400,
+    /*fontVariations: [
+      FontVariation(
+              'wght', 350.0)
+    ],*/
+    fontSize: 15.0,
+    color: Colors.black,
+  );
+
   double weightFromFontWeight(FontWeight weight) {
     // FontWeight.w100 → 100, w900 → 900
     return (weight.index + 1) * 100.0;
