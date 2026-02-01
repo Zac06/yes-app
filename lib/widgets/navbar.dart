@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import '../params/appcolors.dart';
 import '../params/appfonts.dart';
 
@@ -14,48 +15,40 @@ class BottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 70,
+    return Container(
+      color: AppColors.primary,
+      child: Padding(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: 10, vertical: 12),
+      
 
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          splashColor: Colors.transparent,
-          //highlightColor: Colors.transparent
-          
-        ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
+      child: GNav(
+        /*color: AppColors.onPrimaryInactive,
+        activeColor: AppColors.onPrimary,
+        rippleColor: AppColors.primaryRipple,
+        tabBackgroundColor: AppColors.primaryRipple,
+        backgroundColor: AppColors.primary,*/
 
-          onTap: onTap,
-          selectedItemColor: AppColors.onPrimary,
-          unselectedItemColor: AppColors.onPrimaryInactive,
-          backgroundColor: AppColors.primary,
-          selectedLabelStyle: AppFonts.navbarFont.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-          unselectedLabelStyle: AppFonts.navbarFont,
+        color: AppColors.onPrimaryInactive,
+        activeColor: AppColors.primary,
+        rippleColor: AppColors.onPrimary,
+        tabBackgroundColor: AppColors.surfaceBack,
+        backgroundColor: AppColors.primary,
 
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.article_rounded),
-              label: 'Articoli',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.category_rounded),
-              label: 'Categorie',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_2_rounded),
-              label: 'Autori',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.more_vert),
-              label: 'Altro',
-            ),
-          ],
-        ),
+        padding: EdgeInsets.all(14),
+
+        gap: 5,
+        onTabChange: onTap,
+
+        tabs: [
+          GButton(icon: Icons.article_rounded, text: 'Articoli'),
+          GButton(icon: Icons.category_rounded, text: 'Categorie'),
+          GButton(icon: Icons.person_2_rounded, text: 'Autori'),
+          GButton(icon: Icons.more_vert, text: 'Altro'),
+        ],
       ),
-    );
+    ),
+    )
+    
+    ;
   }
 }
