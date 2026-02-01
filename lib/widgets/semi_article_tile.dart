@@ -4,9 +4,9 @@ import 'screens/article_page.dart';
 import '../params/appcolors.dart';
 import '../params/appfonts.dart';
 
-class FullArticleTile extends StatelessWidget {
+class SemiArticleTile extends StatelessWidget {
   final Post post;
-  const FullArticleTile({Key? key, required this.post}) : super(key: key);
+  const SemiArticleTile({Key? key, required this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,8 @@ class FullArticleTile extends StatelessWidget {
         ).push(MaterialPageRoute(builder: (_) => ArticlePage(post: post)));
       },
       child: Card(
-        color: AppColors.surfaceTop,
         margin: const EdgeInsets.only(bottom: 16),
+        color: AppColors.surfaceTop,
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,37 +60,12 @@ class FullArticleTile extends StatelessWidget {
                     style: AppFonts.bodyFont.copyWith(color: AppColors.text),
                   ),
 
-                  if (post.categories.isNotEmpty) ...[
-                    const SizedBox(height: 6),
-                    Wrap(
-                      spacing: 6,
-                      children: post.categories
-                          .map(
-                            (c) => Chip(
-                              label: Text(c),
-                              visualDensity: VisualDensity.compact,
-                              padding: EdgeInsets.all(0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                                side: BorderSide(
-                                  color: AppColors.primaryActive,
-                                ),
-                              ),
-                              backgroundColor: AppColors.primaryActive,
-                              labelStyle: AppFonts.catFont.copyWith(
-                                color: AppColors.onPrimary,
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ],
-
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 6),
 
                   Text(
                     post.excerpt,
                     style: AppFonts.bodyFont.copyWith(color: AppColors.text),
+                    maxLines: 2,
                   ),
                 ],
               ),

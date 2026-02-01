@@ -51,4 +51,5 @@ flutter:
           weight: 400
     
   assets:
-    - assets/images/titlelogo.png
+    - assets/images/
+    - assets/images/categories/

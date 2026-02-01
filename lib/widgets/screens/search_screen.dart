@@ -64,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Errore nella ricerca: $e')));
+        ).showSnackBar(SnackBar(content: Text('Errore nella ricerca: prova a controllare la rete.')));
       }
     } finally {
       setState(() => loading = false);
@@ -119,7 +119,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
         child: Column(
           children: [
             TextField(

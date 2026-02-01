@@ -17,6 +17,7 @@ class ReducedArticleTile extends StatelessWidget {
         ).push(MaterialPageRoute(builder: (_) => ArticlePage(post: post)));
       },
       child: Card(
+        color: AppColors.surfaceTop,
         margin: const EdgeInsets.only(bottom: 16),
         clipBehavior: Clip.antiAlias,
         child: Column(

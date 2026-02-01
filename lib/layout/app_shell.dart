@@ -4,6 +4,7 @@ import '../widgets/main_appbar.dart';
 import '../params/appcolors.dart';
 import '../widgets/screens/home_screen.dart';
 import '../widgets/screens/search_screen.dart';
+import '../widgets/screens/categories_screen.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key, required this.title});
@@ -19,8 +20,8 @@ class _AppShellState extends State<AppShell> {
   List<Widget> screens=const [
     HomeScreen(),
     SearchScreen(),
-    /*NotificationPage(),
-    ProfilePage()*/
+    CategoriesScreen(),
+    //ProfilePage()
   ];
 
   void onTap(int index){
