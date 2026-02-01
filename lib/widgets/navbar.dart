@@ -40,8 +40,8 @@ class BottomNavbar extends StatelessWidget {
 
         tabs: [
           GButton(icon: Icons.article_rounded, text: 'Articoli'),
+          GButton(icon: Icons.search_rounded, text: 'Cerca'),
           GButton(icon: Icons.category_rounded, text: 'Categorie'),
-          GButton(icon: Icons.person_2_rounded, text: 'Autori'),
           GButton(icon: Icons.more_vert, text: 'Altro'),
         ],
       ),

@@ -6,10 +6,7 @@ class YESApi {
   static const String _base =
       'https://live.iiseinaudiscarpa.edu.it/yes-site/index.php/wp-json/wp/v2';
 
-  static Future<List<Post>> fetchPosts({
-    int page = 1,
-    int perPage = 10,
-  }) async {
+  static Future<List<Post>> fetchPosts({int page = 1, int perPage = 10}) async {
     final uri = Uri.parse(
       '$_base/posts'
       '?_embed'
@@ -28,18 +25,32 @@ class YESApi {
   }
 
   static Future<Post> fetchPostById(int id) async {
-  final uri = Uri.parse(
-    '$_base/posts/$id?_embed',
-  );
+    final uri = Uri.parse('$_base/posts/$id?_embed');
 
-  final response = await http.get(uri);
+    final response = await http.get(uri);
 
-  if (response.statusCode != 200) {
-    throw Exception('Failed to load post $id');
+    if (response.statusCode != 200) {
+      throw Exception('Failed to load post $id');
+    }
+
+    final data = json.decode(response.body);
+    return Post.fromJson(data);
   }
 
-  final data = json.decode(response.body);
-  return Post.fromJson(data);
-}
+  static Future<List<Post>> searchPosts(String q) async {
+    final uri = Uri.parse(
+      '$_base/posts'
+      '?_embed'
+      '&search=${Uri.encodeQueryComponent(q)}',
+    );
 
+    final response = await http.get(uri);
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to search posts');
+    }
+
+    final List data = json.decode(response.body);
+    return data.map((e) => Post.fromJson(e)).toList();
+  }
 }

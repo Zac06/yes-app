@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import '../params/appassets.dart';
 import '../params/appcolors.dart';
 import '../params/appfonts.dart';
@@ -20,7 +19,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(AppAssets.logo, height: 32),
+              Image.asset(AppAssets.logo, height: 32, width: 32,),
               const SizedBox(width: 12),
               Text(
                 title,

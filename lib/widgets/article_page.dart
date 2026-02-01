@@ -5,6 +5,8 @@ import '../params/appfonts.dart';
 import '../params/appcolors.dart';
 import '../dt/post.dart';
 
+import 'package:html/parser.dart' as html_parser;
+
 class ArticlePage extends StatelessWidget {
   final Post post;
 
@@ -15,6 +17,28 @@ class ArticlePage extends StatelessWidget {
     if (!await launchUrl(url, mode: LaunchMode.platformDefault)) {
       debugPrint('Could not launch $urlString');
     }
+  }
+
+  String _unrollWpGroups(String html) {
+    final document = html_parser.parse(html);
+
+    final groups = document.querySelectorAll('div.wp-block-group');
+
+    for (final group in groups) {
+      final figures = group.children
+          .where((e) => e.localName == 'figure')
+          .toList();
+
+      if (figures.isEmpty) continue;
+
+      for (final figure in figures) {
+        group.parent?.insertBefore(figure, group);
+      }
+
+      group.remove();
+    }
+
+    return document.body?.innerHtml ?? html;
   }
 
   @override
@@ -29,7 +53,7 @@ class ArticlePage extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Html(
-          data: post.contentHtml,
+          data: _unrollWpGroups(post.contentHtml),
           onLinkTap: (url, attributes, element) {
             if (url != null) {
               _launchUrl(url);
@@ -40,6 +64,22 @@ class ArticlePage extends StatelessWidget {
               AppFonts.bodyFont.copyWith(color: AppColors.text),
             ),
             "img": Style(width: Width.auto(), margin: Margins.only(bottom: 16)),
+
+            ".wp-block-gallery": Style(
+              display: Display.block,
+              margin: Margins.only(bottom: 16),
+            ),
+            ".wp-block-columns": Style(
+              display: Display.block,
+              margin: Margins.only(bottom: 16),
+            ),
+            ".wp-block-column": Style(
+              display: Display.block,
+              margin: Margins.only(bottom: 8),
+            ),
+
+            
+
             // WordPress caption wrapper
             "figure": Style(margin: Margins.only(bottom: 16)),
             // Caption text styling
@@ -134,29 +174,33 @@ class ArticlePage extends StatelessWidget {
                     ? src
                     : 'https://live.iiseinaudiscarpa.edu.it/yes-site$src';
 
-                return Image.network(
-                  imageUrl,
-                  width: double.infinity,
-                  fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) {
-                    debugPrint('Failed to load image: $imageUrl');
-                    return Container(
-                      padding: const EdgeInsets.all(8),
-                      color: Colors.grey[200],
-                      child: const Center(
-                        child: Icon(Icons.broken_image, size: 48),
-                      ),
-                    );
-                  },
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Image.network(
+                      imageUrl,
+                      width: constraints.maxWidth,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        debugPrint('Failed to load image: $imageUrl');
+                        return Container(
+                          padding: const EdgeInsets.all(8),
+                          color: Colors.grey[200],
+                          child: const Center(
+                            child: Icon(Icons.broken_image, size: 48),
+                          ),
+                        );
+                      },
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
                     );
                   },
                 );
