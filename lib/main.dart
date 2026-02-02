@@ -18,11 +18,11 @@ void main() async {
     frequency: const Duration(minutes: 15), // Android minimum is 15 minutes
   );
 
-  runApp(const MyApp());
+  runApp(const YesApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class YesApp extends StatelessWidget {
+  const YesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
