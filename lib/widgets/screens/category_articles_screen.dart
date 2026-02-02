@@ -90,38 +90,40 @@ class _CategoryArticlesScreenState extends State<CategoryArticlesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.surfaceBack,
-      appBar: AppBar(
-        title: Text(widget.categoryName, style: AppFonts.headerFont),
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: AppColors.surfaceBack,
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async => _loadPosts(refresh: true),
-        child: _loading
-            ? const Center(
-                child: CircularProgressIndicator(color: AppColors.primary),
-              )
-            : ListView.builder(
-                controller: _scrollController,
-                padding: const EdgeInsets.all(16),
-                itemCount: _posts.length + (_loadingMore ? 1 : 0),
-                itemBuilder: (context, index) {
-                  if (index >= _posts.length) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.primary,
+        appBar: AppBar(
+          title: Text(widget.categoryName, style: AppFonts.headerFont),
+          backgroundColor: AppColors.surfaceBack,
+        ),
+        body: RefreshIndicator(
+          onRefresh: () async => _loadPosts(refresh: true),
+          child: _loading
+              ? const Center(
+                  child: CircularProgressIndicator(color: AppColors.primary),
+                )
+              : ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.all(16),
+                  itemCount: _posts.length + (_loadingMore ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index >= _posts.length) {
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primary,
+                          ),
                         ),
-                      ),
-                    );
-                  }
+                      );
+                    }
 
-                  final post = _posts[index];
-                  return SemiArticleTile(post: post);
-                },
-              ),
+                    final post = _posts[index];
+                    return SemiArticleTile(post: post);
+                  },
+                ),
+        ),
       ),
     );
   }
