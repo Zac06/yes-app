@@ -1,0 +1,6 @@
+- Added bottom navigation bar
+- Added categories tab
+- Added search bar
+- Added others tab (website, app source, version info, developer info)
+- Fixed WordPress picture rendering crash issue (infinite width)
+- Partitioning of code structure

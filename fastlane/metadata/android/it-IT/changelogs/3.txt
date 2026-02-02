@@ -1,0 +1,6 @@
+- Aggiunta barra di navigazione inferiore
+- Aggiunta scheda delle categorie
+- Aggiunta barra di ricerca
+- Aggiunta scheda “Altro” (sito web, sorgente dell’app, informazioni sulla versione, informazioni sullo sviluppatore)
+- Risolto un crash nel rendering delle immagini di WordPress (larghezza infinita)
+- Riorganizzazione della struttura del codice
