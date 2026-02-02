@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../params/appfonts.dart';
+
+import 'package:yessite_app/params/appfonts.dart';
 
 class CategoryListButton extends StatelessWidget {
   final String title;

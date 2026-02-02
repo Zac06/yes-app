@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:yessite_app/widgets/screens/other_screen.dart';
-import '../widgets/navbar.dart';
-import '../widgets/main_appbar.dart';
-import '../params/appcolors.dart';
-import '../widgets/screens/home_screen.dart';
-import '../widgets/screens/search_screen.dart';
-import '../widgets/screens/categories_screen.dart';
-import '../widgets/screens/other_screen.dart';
+import 'package:yessite_app/widgets/navbar.dart';
+import 'package:yessite_app/widgets/main_appbar.dart';
+import 'package:yessite_app/params/appcolors.dart';
+import 'package:yessite_app/widgets/screens/home_screen.dart';
+import 'package:yessite_app/widgets/screens/search_screen.dart';
+import 'package:yessite_app/widgets/screens/categories_screen.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key, required this.title});

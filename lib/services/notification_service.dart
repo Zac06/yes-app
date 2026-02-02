@@ -1,7 +1,8 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../api/yes_api.dart';
-import '../dt/post.dart';
+
+import 'package:yessite_app/api/yes_api.dart';
+import 'package:yessite_app/dt/post.dart';
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin _notifications =

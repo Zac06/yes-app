@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'services/notification_service.dart';
-import 'services/background_task_service.dart';
-import 'layout/app_shell.dart';
-import 'params/appcolors.dart';
+
+import 'package:yessite_app/services/notification_service.dart';
+import 'package:yessite_app/services/background_task_service.dart';
+import 'package:yessite_app/layout/app_shell.dart';
+import 'package:yessite_app/params/appcolors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,4 +1,4 @@
-import '../params/appassets.dart';
+import 'package:yessite_app/params/appassets.dart';
 
 class CategoryListAssoc {
   static final Map<int, String> catList = {

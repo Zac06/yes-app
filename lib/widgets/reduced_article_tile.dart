@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../dt/post.dart';
+
+import 'package:yessite_app/dt/post.dart';
 import 'screens/article_page.dart';
-import '../params/appcolors.dart';
-import '../params/appfonts.dart';
+import 'package:yessite_app/params/appcolors.dart';
+import 'package:yessite_app/params/appfonts.dart';
 
 class ReducedArticleTile extends StatelessWidget {
   final Post post;

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../dt/post.dart';
+
+import 'package:yessite_app/dt/post.dart';
 
 class YESApi {
   static const String _base =

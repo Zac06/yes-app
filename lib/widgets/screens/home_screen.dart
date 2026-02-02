@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:yessite_app/widgets/full_article_tile.dart';
-import '../../dt/post.dart';
-import '../../api/yes_api.dart';
-import '../../services/notification_service.dart';
-import '../../services/version_check_service.dart';
-import '../../params/appcolors.dart';
+import 'package:yessite_app/dt/post.dart';
+import 'package:yessite_app/api/yes_api.dart';
+import 'package:yessite_app/services/notification_service.dart';
+import 'package:yessite_app/services/version_check_service.dart';
+import 'package:yessite_app/params/appcolors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

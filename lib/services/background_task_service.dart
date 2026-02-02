@@ -1,5 +1,6 @@
 import 'package:workmanager/workmanager.dart';
-import 'notification_service.dart';
+
+import 'package:yessite_app/services/notification_service.dart';
 
 /// Background task handler - must be top-level function
 @pragma('vm:entry-point')

@@ -3,8 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'package:yessite_app/params/appfonts.dart';
-import '../params/appcolors.dart';
+import 'package:yessite_app/params/appcolors.dart';
 
 class VersionCheckService {
   static const String _githubApiUrl =

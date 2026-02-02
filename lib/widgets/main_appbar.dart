@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../params/appassets.dart';
-import '../params/appcolors.dart';
-import '../params/appfonts.dart';
+
+import 'package:yessite_app/params/appassets.dart';
+import 'package:yessite_app/params/appcolors.dart';
+import 'package:yessite_app/params/appfonts.dart';
 
 class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

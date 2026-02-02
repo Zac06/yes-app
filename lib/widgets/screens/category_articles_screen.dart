@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../api/yes_api.dart';
-import '../../dt/post.dart';
-import '../semi_article_tile.dart';
-import '../../params/appcolors.dart';
-import '../../params/appfonts.dart';
+
+import 'package:yessite_app/api/yes_api.dart';
+import 'package:yessite_app/dt/post.dart';
+import 'package:yessite_app/widgets/semi_article_tile.dart';
+import 'package:yessite_app/params/appcolors.dart';
+import 'package:yessite_app/params/appfonts.dart';
 
 class CategoryArticlesScreen extends StatefulWidget {
   final int categoryId;

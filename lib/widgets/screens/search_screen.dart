@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:yessite_app/params/appcolors.dart';
 import 'package:yessite_app/params/appfonts.dart';
-import '../../api/yes_api.dart';
-import '../../dt/post.dart';
-import '../reduced_article_tile.dart';
+import 'package:yessite_app/api/yes_api.dart';
+import 'package:yessite_app/dt/post.dart';
+import 'package:yessite_app/widgets/reduced_article_tile.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
